@@ -5,14 +5,9 @@ class Taxon:
   year=''
   author=''
   type=''
-  children=() # А почему бы нам не использовать dict - () тут вместо list - [] ? Мы же ничего тут не меняем :)
+  children=()
 
   def __init__(self, name, type="", year="", author="", children=() ):
-      '''
-      Если мы используем дефолтные значения для вызова функции, нам не нужно их явно задавать при каждом из вызовов этой функции,
-      т.е. это нам позволяет писать вызовы типа PS=Taxon('Gobiidae'), вместо обязательных PS=Taxon(name="", year="", author="", type="", children=() ) в противном случае
-      Более подробно рекомендую почитать об этом, например, вот тут: http://younglinux.info/oopython/init.php
-      '''
       self.name=name
       self.type=type
       self.year=year
@@ -20,18 +15,11 @@ class Taxon:
       self.children=children
       
   def __repr__(self):
-	  '''
-	  Эта функция используется для так называемой репрезентации объекта и отвечает за то, что будет выводиться при попытке вывести объект - print Obj.
-	  '''
 	  if self.type:
 	     return "{0} {1} ({2})".format(self.name, self.year, self.type)
 	  else:
 	     return "{0} {1}".format(self.name, self.year)
       
-
-'''
-Создаем корень нашего дерева, в нашем случае это будет семейство Бычковых, которое будет содержать в себе подсемейства Benthophilinae, итд.
-'''
 
 PS=Taxon(name='Gobiidae',
          type='Семейство',
