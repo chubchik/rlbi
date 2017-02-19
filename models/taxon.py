@@ -25,6 +25,9 @@ class Taxon:
       self.is_root = is_root
       
   def __call__(self, optimization_runs=2**4):
+      '''
+      Determinate based on build-in tests which searching algorithm is optimal for the current Tree structure and size.
+      '''
       if self.is_root:
          self.searchAlg = findOptimumSearch(self, runs = optimization_runs, algs=['findF','find_linear','find_dict_linear','findO'], warmup=['flatten','flattenDict'])
       return self
