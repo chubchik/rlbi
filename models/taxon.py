@@ -58,6 +58,9 @@ class Taxon:
 
 
   def setParents(self, parent):
+      '''
+      Sets recursively parent node for each children node
+      '''
       self.parent = parent
       for c in self.children:
           c.setParents(self)
