@@ -4,12 +4,11 @@ from rlbig.BioAlg import flattenTree, flattenDictTree, flattenSearch, flattenLSe
 from rlbig.BioOptimization import findOptimumSearch
 
 class Taxon:
-  name=''
-  year=''
-  author=''
-  type=''
-  children=()
-  
+  #name=''
+  #year=''
+  #author=''
+  #type=''
+  #children=()
   searchAlg = ''
 
 
