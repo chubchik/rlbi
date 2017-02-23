@@ -22,6 +22,7 @@ class Taxon:
       self.author=author
       self.children=children
       self.is_root = is_root
+      self.parent = self
       
   def __call__(self, optimization_runs=2**4):
       '''
@@ -29,6 +30,7 @@ class Taxon:
       '''
       if self.is_root:
          self.searchAlg = findOptimumSearch(self, runs = optimization_runs, algs=['findF','find_linear','find_dict_linear','findO'], warmup=['flatten','flattenDict'])
+         self.setParents(self)
       return self
 
   def __repr__(self):
@@ -54,6 +56,12 @@ class Taxon:
       '''
       return flattenTree(self, 0, printout)
 
+
+  def setParents(self, parent):
+      self.parent = parent
+      for c in self.children:
+          c.setParents(self)
+  
 
 
   def find(self, text='',type='',raw=False,alg=None):

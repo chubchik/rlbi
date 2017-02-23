@@ -6,7 +6,7 @@ def flattenTree(node,depth=0,printout=False):
     '''
     Flatten a given tree. Additionally if printout is True print it out as tree while going thru it's structure.
     '''
-    searchIndex = [value.upper() for attr, value in node.__dict__.iteritems() if attr not in ('children','type','is_root') and value!='']
+    searchIndex = [value.upper() for attr, value in node.__dict__.iteritems() if attr not in ('parent','children','type','is_root') and value!='']
     results = [(node, node.type, node.name, "/".join(searchIndex))]
 
     if printout:
@@ -31,7 +31,7 @@ def flattenDictTree(node,depth=0,printout=False):
     '''
     Flatten a given tree. Additionally if printout is True print it out as tree while going thru it's structure.
     '''
-    searchIndex = [value.upper() for attr, value in node.__dict__.iteritems() if attr not in ('children','type','is_root') and value!='']
+    searchIndex = [value.upper() for attr, value in node.__dict__.iteritems() if attr not in ('parent','children','type','is_root') and value!='']
     results = [{'node':node, 'type': node.type, 'name': node.name, 'index':"/".join(searchIndex)}]
 
     if printout:
