@@ -1,16 +1,11 @@
 #-*- coding: utf-8 -*-
 from rlbig.BioAlg import flattenTree, flattenDictTree, flattenSearch, flattenLSearch, flattenDSearch, flattenOSearch
-
 from rlbig.BioOptimization import findOptimumSearch
 
-class Taxon:
-  #name=''
-  #year=''
-  #author=''
-  #type=''
-  #children=()
-  searchAlg = ''
 
+
+class Taxon:
+  searchAlg = ''
 
   def __init__(self, name, type="", year="", author="", children=(), is_root=False):
       '''
