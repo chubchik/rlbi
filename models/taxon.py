@@ -2,14 +2,15 @@
 from rlbig.BioAlg import flattenTree, flattenDictTree, flattenSearch, flattenLSearch, flattenDSearch, flattenOSearch
 from rlbig.BioOptimization import findOptimumSearch
 
+from rlbig.models import BaseTree
 
 
-class Taxon:
+class Taxon(BaseTree):
   searchAlg = ''
 
-  def __init__(self, name, type="", year="", author="", children=(), is_root=False):
+  def __init__(self, name, type=None, year=None, author=None, children=(), is_root=False):
       '''
-      Initialization
+      Initialization of Taxon class
       '''
       self.name=name
       self.type=type
@@ -18,6 +19,8 @@ class Taxon:
       self.children=children
       self.is_root = is_root
       self.parent = self
+      
+      self.is_physical = False
       
   def __call__(self, optimization_runs=2**4):
       '''
@@ -33,9 +36,9 @@ class Taxon:
       Self-representation
       '''
       if self.type:
-         return "{0} {1} ({2})".format(self.name, self.year, self.type)
+         return "{0} {1} ({2})".format(self.name, self.year if self.year else '', self.type)
       else:
-         return "{0} {1}".format(self.name, self.year)
+         return "{0} {1}".format(self.name, self.year if self.year else '')
 
 
   def flattenDict(self,printout=False):
@@ -52,17 +55,7 @@ class Taxon:
       return flattenTree(self, 0, printout)
 
 
-  def setParents(self, parent):
-      '''
-      Sets recursively parent node for each children node
-      '''
-      self.parent = parent
-      for c in self.children:
-          c.setParents(self)
-  
-
-
-  def find(self, text='',type='',raw=False,alg=None):
+  def find(self, text='', type=None, raw=False, alg=None):
       '''
       Searches in it's own tree. 
       Use the dynamical search function based on result of calling findOptimumSearch
@@ -71,7 +64,7 @@ class Taxon:
       return sfunc(text, type, raw)
 
 
-  def findF(self, text='',type='',raw=False):
+  def findF(self, text='', type=None, raw=False):
       '''
       Searches in it's own tree. 
       Return raw information, if raw parameter is given.
@@ -79,7 +72,7 @@ class Taxon:
       return flattenSearch(self, text, type, raw)
 
 
-  def findO(self, text='',type='',raw=False):
+  def findO(self, text='', type=None, raw=False):
       '''
       Searches in it's own tree. 
       Return raw information, if raw parameter is given.
@@ -87,7 +80,7 @@ class Taxon:
       return flattenOSearch(self, text, type, raw)
 
 
-  def find_linear(self, text='',type='',raw=False):
+  def find_linear(self, text='', type=None, raw=False):
       '''
       Searches in it's own tree. 
       Return raw information, if raw parameter is given.
@@ -95,7 +88,7 @@ class Taxon:
       return flattenLSearch(self, text, type, raw)
 
 
-  def find_dict_linear(self, text='',type='',raw=False):
+  def find_dict_linear(self, text='', type=None, raw=False):
       '''
       Searches in it's own tree. 
       Return raw information, if raw parameter is given.

@@ -6,9 +6,8 @@ def flattenTree(node,depth=0,printout=False):
     '''
     Flatten a given tree. Additionally if printout is True print it out as tree while going thru it's structure.
     '''
-    searchIndex = [value.upper() for attr, value in node.__dict__.iteritems() if attr not in ('parent','children','type','is_root') and value!='']
-    results = [(node, node.type, node.name, "/".join(searchIndex))]
-
+    searchIndex = [value.upper() for attr, value in node.__dict__.iteritems() if attr in ('name','year','author') and value and value!='']
+    results = [(node, node.type, node.name if hasattr(node, 'name') else node, "/".join(searchIndex))]
     if printout:
        print "{0}{1}".format(' ' * depth, node.name)
 
@@ -31,8 +30,8 @@ def flattenDictTree(node,depth=0,printout=False):
     '''
     Flatten a given tree. Additionally if printout is True print it out as tree while going thru it's structure.
     '''
-    searchIndex = [value.upper() for attr, value in node.__dict__.iteritems() if attr not in ('parent','children','type','is_root') and value!='']
-    results = [{'node':node, 'type': node.type, 'name': node.name, 'index':"/".join(searchIndex)}]
+    searchIndex = [value.upper() for attr, value in node.__dict__.iteritems() if attr in ('name','year','author') and value and value!='']
+    results = [{'node':node, 'type': node.type, 'name': node.name if hasattr(node,'name') else node, 'index':"/".join(searchIndex)}]
 
     if printout:
        print "{0}{1}".format(' ' * depth, node.name)
